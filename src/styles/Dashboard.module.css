@@ -1,0 +1,130 @@
+.containerProducts{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.containerInfoDashboard{
+    background-color: var(--background-white);
+    padding: 0.5rem;
+    margin: 1rem 0.5rem;
+    border-radius: 2px;
+}
+.description{
+    display: flex;
+    justify-content: space-between;
+}
+.titleProduct{
+    margin-left: 0.5rem;
+    margin-bottom: 0;
+}
+.container table{
+    margin: auto;
+}
+
+.container table,
+.container tr,
+.container td
+{
+    border: 1px solid #000;
+}
+
+.container td{
+    padding: 0.5rem;
+}
+.container thead td{
+    text-align: center;
+    font-weight: 600;
+}
+
+.successButton{
+    background-color: var(--success);
+    color: var(--font-white);
+    border: none;
+    padding: 0.5rem;
+}
+.confirmationButton{
+    background-color: var(--primary);
+    color: var(--font-white);
+    border: none;
+    padding: 0.5rem;
+}
+
+.containerProduct{
+    background-color: var(--background-white);
+    padding: 1rem;
+    margin: auto;
+    border-radius: 2px;
+    display: flex;
+    max-width: 50rem;
+}
+.containerProduct .containerInfoProduct{
+    display: flex;
+    width: 100%;
+}
+
+.productDescription{
+    max-width: 30rem;
+}
+.productImage{
+    height: 17rem;
+    width: 15rem;
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.productImage input{
+    border: none;
+    margin: 0.3rem 0;
+    padding: 0.4rem;
+}
+.emptyImage{
+    height: 100%;
+    width: 100%;
+}
+.productImage img{
+    height: 90% !important;
+    width: 100%;
+}
+.emptyImage{
+    height: 18rem;
+    background-color: bisque;
+    width: 15rem;
+}
+.productInput{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.productInput input,
+.productInput textarea{
+    width: 100%;
+    border: none;
+    margin: 0.3rem 0;
+    padding: 0.4rem;
+}
+.productInput textarea{
+    height: 100%;
+}
+
+.productDescription{
+    height: 100%;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+.productImage input{
+    width: 100%;
+}
+.productImage img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.containerButton button{
+    background-color: var(--secundary);
+    width: 5rem;
+    height: 2rem;
+    border: none;
+    border-radius: 2px;
+    color: var(--font-white);
+}

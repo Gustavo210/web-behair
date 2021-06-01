@@ -1,0 +1,23 @@
+.container{
+    background-color: var(--primary);
+    height: 3.5rem;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    color: var(--font-white);
+    position: fixed;
+    width: 100vw;
+}
+
+.links > a{
+    margin: 0 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.spacer{
+    height: 3.5rem;
+}

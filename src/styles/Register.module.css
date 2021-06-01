@@ -1,0 +1,86 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+.container > section{
+  flex: 1;
+}
+
+.sectionRegister{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--background-white);
+}
+.goBack{
+  font-size: 2rem;
+  margin: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent
+}
+.containerRegister{
+  
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--background-white);
+  align-items: center;
+}
+.containerRegister  form{
+  
+  display: flex;
+  flex-direction: column;
+
+}
+.inputStyles{
+  width: 20rem;
+  height: 3rem;
+  border: none;
+  margin: 0.2rem 0;
+  color: var(--text-default);
+  padding: 0.5rem;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
+.containerRegister  form > button{
+  background-color: var(--secundary);
+  margin-top: 1.3rem;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(138, 44, 226, 0.05);
+  border: none;
+  height: 3rem;
+  font-size: 0.9rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+.containerRegister  form > button:hover{
+opacity: 0.8;
+
+}
+
+.sectionLogo{
+  background-color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.groupByLabelInput >label{
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  margin-top: .5rem;
+}
+.groupByLabelInput{
+  display: flex;
+  flex-direction: column;
+}
+.error{
+  border: 2px solid red;
+}

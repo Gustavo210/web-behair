@@ -1,0 +1,51 @@
+.container{
+    background-color: var(--background-white);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+    margin: 0.3rem;
+    padding: 0.3rem;
+    border-radius: 2px;
+    min-width: 40vw;
+    min-height: 10vh;
+    display: flex;
+}
+.imageContainer{
+    display: flex;
+    align-items: center;
+}
+
+.description{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.info{
+    margin-left: 1rem;
+}
+
+.info small{
+    font-weight: 400;
+    font-size: 0.7rem;
+}
+.info p {
+    margin-bottom: 0;
+}
+.containerButtons > button{
+    margin:0.2rem;
+}
+.containerButtons>button{
+    color: var(--font-white);
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 5px;
+}
+.containerButtons>button:hover{
+    opacity: 0.8;
+}
+.removeItem{
+    background-color: #ff3222;
+}
+.editItem{
+    background-color: #555;
+    
+}

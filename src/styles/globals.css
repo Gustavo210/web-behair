@@ -1,0 +1,28 @@
+:root{
+  --background-white: #f1f1f1;
+  --font-white:#fff;
+
+  --text-default:#333;
+  --secundary:#F84C1B;
+  --primary:#0A3473;
+  --success:green;
+}
+
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
