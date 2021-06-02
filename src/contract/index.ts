@@ -13,6 +13,8 @@ export interface PropsProduct {
     cost: number
     created_at: string
     updated_at: string
+    onClickEdit?: (id: string) => void
+    onClickDelete?: (id: string) => void
 }
 
 export interface PropsEstablishments {

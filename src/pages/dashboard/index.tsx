@@ -33,6 +33,14 @@ export default function Dashboard() {
     const data = await api.get(`establishments/${user.id}`)
     setEstablishments(data.data)
   }
+
+  async function removeItem(id: string) {
+    await api.delete(`products/${id}`)
+    getData()
+  }
+  async function editItem(id: string) {
+    route.push(`/dashboard/edit/${id}`)
+  }
   return (
     <>
       <HeaderApp title={`${user?.name} ${user?.surname}`} />
@@ -40,10 +48,15 @@ export default function Dashboard() {
         {esteblishments && (
           <>
             <div className={styles.containerInfoDashboard}>
-              <h2>Dashboard</h2>
-              <hr />
+              <div className={styles.titulo}>
+                {esteblishments.photo && <img src={esteblishments.photo} />}
+                <h2>Dashboard</h2>
+              </div>
               <div className={styles.description}>
-                <span>{esteblishments.name}</span>
+                <span>
+                  Estabelecimento {` `}
+                  <strong>{esteblishments.name}</strong>
+                </span>
                 <span>
                   Horario de funcionamento de{' '}
                   {new Date(esteblishments.init_hours)
@@ -64,7 +77,14 @@ export default function Dashboard() {
             <h3 className={styles.titleProduct}>Produtos</h3>
             <div className={styles.containerProducts}>
               {esteblishments?.products.map((item, index) => {
-                return <ProductItem {...item} />
+                return (
+                  <ProductItem
+                    onClickDelete={(id) => removeItem(id)}
+                    onClickEdit={(id) => editItem(id)}
+                    key={index}
+                    {...item}
+                  />
+                )
               })}
             </div>
           </>

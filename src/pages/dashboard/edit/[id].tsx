@@ -1,21 +1,24 @@
-import styles from '../../styles/Dashboard.module.css'
+import styles from '../../../styles/Dashboard.module.css'
 import { useRouter } from 'next/router'
-import HeaderApp from '../../components/HeaderApp'
+import HeaderApp from '../../../components/HeaderApp'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
+import { PropsProduct, PropsUser } from '../../../contract'
+import api from '../../../services/api'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import IntlCurrencyInput from 'react-intl-currency-input'
 
-import { PropsUser } from '../../contract'
-import api from '../../services/api'
-
-export default function CreateProduct() {
+const CreateProduct: React.FC<PropsProduct> = (props) => {
   const route = useRouter()
   const [user, setUser] = useState<PropsUser | null>(null)
-  const [image, setImage] = useState('')
-  const [productName, setProductName] = useState('')
-  const [productDescription, setProductDescription] = useState('')
-
-  const [productPriceRaw, setProductPriceRaw] = useState(0)
+  const [image, setImage] = useState(props.photo)
+  const [productName, setProductName] = useState(props.name)
+  const [productDescription, setProductDescription] = useState(
+    props.description,
+  )
+  const [productPriceRaw, setProductPriceRaw] = useState(
+    Number(props.cost.toFixed(2)),
+  )
   useEffect(() => {
     const user = Cookies.get('@user')
     if (!user) {
@@ -24,12 +27,6 @@ export default function CreateProduct() {
       setUser(JSON.parse(user))
     }
   }, [])
-
-  const handleChange = (event, value, maskedValue) => {
-    event.preventDefault()
-    setProductPriceRaw(value)
-  }
-
   const currencyConfig = {
     locale: 'pt-BR',
     formats: {
@@ -43,36 +40,36 @@ export default function CreateProduct() {
       },
     },
   }
-  async function getAllData(event) {
-    event.preventDefault()
 
-    const data = await api.get(`establishments/${user.id}`)
-    if (!data?.data?.id) {
-      route.replace('/')
-    }
+  const handleChange = (event, value, maskedValue) => {
+    event.preventDefault()
+    setProductPriceRaw(value)
+  }
+
+  async function setData(event) {
+    event.preventDefault()
     const createProduct = {
       name: productName,
       photo: image,
       description: productDescription,
       cost: productPriceRaw,
-      id_establishment: data.data.id,
     }
     if (!productName || !image || !productDescription || !productPriceRaw) {
       alert('erro ao cadastrar produto, preencha todos os campos corretamente')
     }
-    const response = await api.post('products', createProduct)
-    if (response.status === 201) {
+    const response = await api.put(`products/${props.id}`, createProduct)
+    if (response.status === 200) {
       route.replace('/dashboard')
       return
     }
-    alert('Erro ao cadastrar produto')
+    alert('Erro ao salvar produto')
   }
   return (
     <>
       <HeaderApp title={`${user?.name} ${user?.surname}`} />
       <div className={styles.container}>
-        <h1>Novo produto</h1>
-        <form className={styles.containerProduct} onSubmit={getAllData}>
+        <h1>Editar produto</h1>
+        <form className={styles.containerProduct} onSubmit={setData}>
           <div className={styles.containerInfoProduct}>
             <div className={styles.productImage}>
               {image ? (
@@ -93,8 +90,8 @@ export default function CreateProduct() {
                 <input
                   value={productName}
                   onChange={(text) => setProductName(text.target.value)}
-                  required
                   id="name"
+                  required
                   type="text"
                 />
               </div>
@@ -103,8 +100,8 @@ export default function CreateProduct() {
                 <textarea
                   value={productDescription}
                   onChange={(text) => setProductDescription(text.target.value)}
-                  required
                   id="description"
+                  required
                   placeholder="Descricao do produto"
                 />
               </div>
@@ -114,10 +111,10 @@ export default function CreateProduct() {
                   required
                   id="price"
                   placeholder="Preço"
-                  value={productPriceRaw}
                   currency="BRL"
                   config={currencyConfig}
                   onChange={handleChange}
+                  value={productPriceRaw}
                 />
               </div>
             </div>
@@ -131,4 +128,26 @@ export default function CreateProduct() {
       </div>
     </>
   )
+}
+export default CreateProduct
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  }
+}
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const id = ctx.params.id
+  const { data } = await api.get(`products/${id}`)
+  if (data) {
+    return {
+      props: data,
+      revalidate: 1000,
+    }
+  }
+  return {
+    props: {},
+    redirect: '/dashboard',
+  }
 }
