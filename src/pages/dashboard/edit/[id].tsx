@@ -102,7 +102,7 @@ const CreateProduct: React.FC<PropsProduct> = (props) => {
                   onChange={(text) => setProductDescription(text.target.value)}
                   id="description"
                   required
-                  placeholder="Descricao do produto"
+                  placeholder="Descrição do produto"
                 />
               </div>
               <div className={styles.productUrlAndCost}>
