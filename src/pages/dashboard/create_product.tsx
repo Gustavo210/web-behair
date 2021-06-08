@@ -46,7 +46,7 @@ export default function CreateProduct() {
   async function getAllData(event) {
     event.preventDefault()
 
-    const data = await api.get(`establishments/${user.id}`)
+    const data = await api.get(`establishments/${ user.id }`)
     if (!data?.data?.id) {
       route.replace('/')
     }
@@ -60,7 +60,10 @@ export default function CreateProduct() {
     if (!productName || !image || !productDescription || !productPriceRaw) {
       alert('erro ao cadastrar produto, preencha todos os campos corretamente')
     }
-    const response = await api.post('products', createProduct)
+    const response = await api.post('products', createProduct).catch(error => {
+      alert(error.response.data.message)
+      return error
+    })
     if (response.status === 201) {
       route.replace('/dashboard')
       return
@@ -69,7 +72,7 @@ export default function CreateProduct() {
   }
   return (
     <>
-      <HeaderApp title={`${user?.name} ${user?.surname}`} />
+      <HeaderApp title={`${ user?.name } ${ user?.surname }`} />
       <div className={styles.container}>
         <h1>Novo produto</h1>
         <form className={styles.containerProduct} onSubmit={getAllData}>

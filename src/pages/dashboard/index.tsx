@@ -30,20 +30,27 @@ export default function Dashboard() {
     }
   }, [user])
   async function getData() {
-    const data = await api.get(`establishments/${user.id}`)
+    const data = await api.get(`establishments/${ user.id }`)
+      .catch(error => {
+        alert(error.response.data.message)
+        return error
+      })
     setEstablishments(data.data)
   }
 
   async function removeItem(id: string) {
-    await api.delete(`products/${id}`)
+    await api.delete(`products/${ id }`).catch(error => {
+      alert(error.response.data.message)
+      return error
+    })
     getData()
   }
   async function editItem(id: string) {
-    route.push(`/dashboard/edit/${id}`)
+    route.push(`/dashboard/edit/${ id }`)
   }
   return (
     <>
-      <HeaderApp title={`${user?.name} ${user?.surname}`} />
+      <HeaderApp title={`${ user?.name } ${ user?.surname }`} />
       <div className={styles.container}>
         {esteblishments && (
           <>

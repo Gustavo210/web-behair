@@ -26,20 +26,30 @@ export default function Reservations() {
   }, [user])
 
   async function handlerAcceptReservation(id: string) {
-    await api.put(`/reservations/accept/${id}`)
+    await api.put(`/reservations/accept/${ id }`)
+      .catch(error => {
+        alert(error.response.data.message)
+        return error
+      })
     getData()
   }
 
   async function getData() {
-    const data = await api.get(`establishments/${user.id}`)
+    const data = await api.get(`establishments/${ user.id }`).catch(error => {
+      alert(error.response.data.message)
+      return error
+    })
     const response = await api.get(
-      `establishments/reservations/${data.data.id}`,
-    )
+      `establishments/reservations/${ data.data.id }`,
+    ).catch(error => {
+      alert(error.response.data.message)
+      return error
+    })
     setReservations(response.data)
   }
   return (
     <>
-      <HeaderApp title={`${user?.name} ${user?.surname}`} />
+      <HeaderApp title={`${ user?.name } ${ user?.surname }`} />
       <div className={styles.container}>
         <h1>Reservas</h1>
         <table>
@@ -74,13 +84,13 @@ export default function Reservations() {
                   <td>
                     {item.phone.length === 11
                       ? item.phone.replace(
-                          /^(\d\d)(\d{5})(\d{4}).*/,
-                          '($1) $2-$3',
-                        )
+                        /^(\d\d)(\d{5})(\d{4}).*/,
+                        '($1) $2-$3',
+                      )
                       : item.phone.replace(
-                          /^(\d\d)(\d{4})(\d{0,4}).*/,
-                          '($1) $2-$3',
-                        )}
+                        /^(\d\d)(\d{4})(\d{0,4}).*/,
+                        '($1) $2-$3',
+                      )}
                   </td>
                   <td>{item.id}</td>
                   <td>{new Date(item.created_at).toLocaleString()}</td>

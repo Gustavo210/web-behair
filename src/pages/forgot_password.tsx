@@ -22,13 +22,16 @@ export default function ForgotPassword() {
         <div className={styles.containerRegister}>
           <h1>Esqueci minha senha</h1>
           <form action="">
-            <input placeholder="Email" type="email" />
+              <div className={styles.groupByLabelInput}>
+                <label htmlFor="email">Email</label>
+                <input id="email" type="email" required className={styles.inputStyles} />
+              </div>
             <button type="submit">Enviar</button>
           </form>
         </div>
       </section>
       <section className={styles.sectionLogo}>
-        <Image src="/images/icon-hair.png" width={250} height={250} />
+        <Image src="/logoWeb.png" width={250} height={250} />
       </section>
     </div>
   )

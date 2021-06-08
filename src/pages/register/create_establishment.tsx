@@ -69,7 +69,10 @@ export default function create_establishment() {
       name: user.name,
       surname: user.surname,
     }
-    await api.post('/register', userEstablishment)
+    await api.post('/register', userEstablishment).catch(error => {
+      alert(error.response.data.message)
+      return error
+    })
     route.push('/')
   }
   return (

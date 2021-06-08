@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Icut</title>
+        <title>BeHair</title>
       </Head>
       <div className={styles.mobile}>👨‍🔧 Acesse o site pelo desktop</div>
       <div className={styles.desktop}>

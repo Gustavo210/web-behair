@@ -9,8 +9,10 @@ import Cookie from 'js-cookie'
 export default function Home() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [lockButton, setLockButton] = useState(false)
   async function submitForm(event) {
     event.preventDefault()
+    setLockButton(true)
 
     await api
       .post('users/login', {
@@ -23,7 +25,10 @@ export default function Home() {
           Cookie.set('@user', response.data)
         }
       })
-      .catch(console.log)
+      .catch(error => {
+        alert(error.response.data.message)
+      })
+    setLockButton(false)
   }
   return (
     <div className={styles.container}>
@@ -48,7 +53,7 @@ export default function Home() {
           <Link href="/forgot_password">
             <a className={styles.forgotPassword}>Esqueci minha senha</a>
           </Link>
-          <button type="submit">Entrar</button>
+          <button type="submit" disabled={lockButton} >Entrar</button>
           <p className={styles.separator}>OU</p>
           <Link href="/register">
             <a className={styles.buttonRegister}>Cadastrar-se</a>
@@ -56,7 +61,7 @@ export default function Home() {
         </form>
       </section>
       <section className={styles.sectionLogo}>
-        <Image src="/images/icon-hair.png" width={250} height={250} />
+        <Image src="/logoWeb.png" width={500} height={500} />
       </section>
     </div>
   )

@@ -114,7 +114,7 @@ export default function Register() {
         </div>
       </section>
       <section className={styles.sectionLogo}>
-        <Image src="/images/icon-hair.png" width={250} height={250} />
+        <Image src="/logoWeb.png" width={500} height={500} />
       </section>
     </div>
   )
