@@ -79,6 +79,7 @@ export default function Dashboard() {
                     .join(':')}
                 </span>
               </div>
+              <small>ID: {esteblishments.id}</small>
             </div>
 
             <h3 className={styles.titleProduct}>Produtos</h3>
